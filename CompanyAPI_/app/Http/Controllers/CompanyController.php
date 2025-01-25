@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller implements HasMiddleware
 {
@@ -21,7 +22,8 @@ class CompanyController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        return Company::all();
+        // Az aktuális felhasználó cégeit adja vissza
+        return Company::where('user_id', Auth::id())->get();
     }
 
     /**
@@ -36,15 +38,21 @@ class CompanyController extends Controller implements HasMiddleware
         
         $company = $request->user()->company()->create($fields);
 
-        return $company;
+        return ['company' => $company, 'user' => $company->user];
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show($id)
     {
-        return $company;
+        // Csak a bejelentkezett felhasználóhoz tartozó céget adja vissza
+        $company = Company::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        
+        return response()->json([
+            'company' => $company,
+            'user' => $company->user,
+        ]);
     }
 
     /**
