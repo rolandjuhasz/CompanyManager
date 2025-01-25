@@ -2,7 +2,6 @@
 import { ref, onMounted } from 'vue';
 import { usePostsStore } from '@/stores/companies'; // a Pinia store
 import { useAuthStore } from '@/stores/auth'; // a bejelentkezett felhasználó adatai
-import CreateCompany from '@/components/CreateCompany.vue';
 
 // Store-ok importálása
 const postsStore = usePostsStore();
@@ -44,10 +43,16 @@ onMounted(async () => {
     </div>
 
     <div v-else>
-        <p class="text-1xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black text-center py-6">You don't have company yet</p>
-        <CreateCompany />
+    <p class="text-1xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black text-center py-6">You don't have a company yet</p>
+</div>
+
+<div class="text-center">
+<RouterLink 
+  :to="{ name: 'create' }" 
+  class="inline-block bg-blue-600 text-white py-2 px-6 rounded-lg text-center hover:bg-blue-700 transition duration-300">Create Company</RouterLink>
 
     </div>
+
   </main>
 </template>
 

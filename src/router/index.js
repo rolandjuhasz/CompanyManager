@@ -34,7 +34,7 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
-      path: "/create",
+      path: "/companies/create",
       name: "create",
       component: CreateCompany,
       meta: { auth: true },
