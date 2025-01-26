@@ -6,6 +6,7 @@ import LoginView from "../views/Auth/LoginView.vue";
 import { useAuthStore } from "@/stores/auth";
 import MyCompaniesView from "@/views/Companies/MyCompaniesView.vue";
 import CreateCompany from "@/components/CreateCompany.vue";
+import ShowCompanyView from "@/views/Companies/ShowCompanyView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,12 @@ const router = createRouter({
       component: CreateCompany,
       meta: { auth: true },
     },
+{
+  path: "/companies/show/:id", // Itt az :id az útvonal paraméter
+  name: "show",
+  component: ShowCompanyView,
+}
+
   ],
 });
 

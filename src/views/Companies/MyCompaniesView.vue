@@ -1,18 +1,18 @@
 <script setup>
 import { ref, onMounted } from 'vue';
-import { usePostsStore } from '@/stores/companies';
+import { useCompanyStore } from '@/stores/companies';
 import { useAuthStore } from '@/stores/auth';
+import DeleteCompany from '@/components/DeleteCompany.vue';
 
 
-const postsStore = usePostsStore();
+const companyStore = useCompanyStore();
 const authStore = useAuthStore();
 const companies = ref([]);
 
-const {deleteCompany} = usePostsStore()
 
 onMounted(async () => {
-  const allPosts = await postsStore.getAllPosts(); 
-  companies.value = allPosts.filter(post => post.user_id === authStore.user.id);
+  const allCompany = await companyStore.getAllCompany(); 
+  companies.value = allCompany.filter(company => company.user_id === authStore.user.id);
 });
 
 </script>
@@ -25,19 +25,24 @@ onMounted(async () => {
 
 
 
-    <div v-if="companies.length > 0">
-      <div v-for="company in companies" :key="company.id" class="company-card">
-        <h2 class="font-bold text-xl">{{ company.name }}</h2>
-        <p>{{ company.description }}</p>
-        <form @submit.prevent="deleteCompany(company)">
-            <button
-              class="text-red-500 font-bold px-2 py-1 border border-red-300"
-            >
-              Delete
-            </button>
-          </form>
-      </div>
-    </div>
+<div v-if="companies.length > 0" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div 
+    v-for="company in companies" 
+    :key="company.id" 
+    class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out transform hover:scale-105"
+  >
+    <h2 class="font-bold text-xl text-gray-800 mb-2">{{ company.name }}</h2>
+    <p class="text-gray-600 mb-4">{{ company.description }}</p>
+    <DeleteCompany />
+    <RouterLink
+  :to="{ name: 'show', params: { id: company.id } }" 
+  class="text-blue-500 font-bold underline"
+>
+  Read more...
+</RouterLink>
+  </div>
+</div>
+
 
     <div v-else>
     <p class="text-1xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-black text-center py-6">You don't have a company yet</p>
@@ -53,25 +58,4 @@ onMounted(async () => {
   </main>
 </template>
 
-<style scoped>
-.company-card {
-  border: 1px solid #ddd;
-  padding: 16px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-}
 
-.company-card h2 {
-  margin-bottom: 8px;
-}
-
-.company-card p {
-  font-size: 14px;
-  color: #555;
-}
-
-.text-blue-500 {
-  color: #3b82f6;
-  text-decoration: underline;
-}
-</style>

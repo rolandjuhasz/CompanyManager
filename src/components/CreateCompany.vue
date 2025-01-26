@@ -1,11 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
 import { storeToRefs } from 'pinia';
-import { usePostsStore } from '@/stores/companies'; 
+import { useCompanyStore } from '@/stores/companies'; 
 
-const {createPost} = usePostsStore()
+const {createCompany} = useCompanyStore()
 
-const {errors} = storeToRefs(usePostsStore())
+const {errors} = storeToRefs(useCompanyStore())
 const formData = reactive({
   name: "",
   description: "",
@@ -13,7 +13,7 @@ const formData = reactive({
 </script>
 
 <template>
-    <form @submit.prevent="createPost(formData)" class="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
+    <form @submit.prevent="createCompany(formData)" class="w-full max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
   <h2 class="text-2xl font-semibold text-center">Create Your Company</h2>
 
   <div class="space-y-2">
@@ -40,6 +40,6 @@ const formData = reactive({
     <p v-if="errors.description" class="text-red-500 text-sm">{{ errors.description[0] }}</p>
   </div>
 
-  <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all">Create Post</button>
+  <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all">Create Company</button>
 </form>
 </template>

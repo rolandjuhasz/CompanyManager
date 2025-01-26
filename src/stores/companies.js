@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { useAuthStore } from "./auth";
 
-export const usePostsStore = defineStore("postsStore", {
+export const useCompanyStore = defineStore("companyStore", {
   state: () => ({
     errors: {},
   }),
   actions: {
-    /******************* Get all posts (only user-related companies) *******************/
-    async getAllPosts() {
+    /******************* Get all company (only user-related companies) *******************/
+    async getAllCompany() {
       const authStore = useAuthStore();
       const userId = authStore.user.id;
 
@@ -21,8 +21,8 @@ export const usePostsStore = defineStore("postsStore", {
       return data;
     },
 
-    /******************* Get a post by ID *******************/
-    async getPost(companyId) {
+    /******************* Get a company by ID *******************/
+    async getCompany(companyId) {
       const res = await fetch(`/api/companies/${companyId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -32,8 +32,8 @@ export const usePostsStore = defineStore("postsStore", {
       return data.company;
     },
 
-    /******************* Create a post *******************/
-    async createPost(formData) {
+    /******************* Create a company *******************/
+    async createCompany(formData) {
       const res = await fetch("/api/companies", {
         method: "POST",
         headers: {
@@ -52,7 +52,7 @@ export const usePostsStore = defineStore("postsStore", {
       }
     },
 
-    /******************* Delete a post *******************/
+    /******************* Delete a company *******************/
     async deleteCompany(company) {
         const authStore = useAuthStore();
         if (authStore.user.id === company.user_id) {
