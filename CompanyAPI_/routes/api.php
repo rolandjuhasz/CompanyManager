@@ -18,7 +18,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('employees', EmployeeController::class);
+Route::apiResource('employees', EmployeeController::class);
 });
 
 Route::middleware('auth:sanctum')->get('/company/{company}/employees', [EmployeeController::class, 'getEmployeesByCompany']);

@@ -3,6 +3,7 @@ import { useAuthStore } from "@/stores/auth";
 import { useCompanyStore } from "@/stores/companies";
 import { onMounted, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
+import EmployeView from "../Employees/EmployeView.vue";
 
 const route = useRoute();
 const { getCompany, deleteCompany } = useCompanyStore();
@@ -25,6 +26,7 @@ onMounted(async () => (company.value = await getCompany(route.params.id)));
         </p>
         <p>
           {{ company.description }}
+          <EmployeView />
         </p>
 
 
@@ -36,7 +38,7 @@ onMounted(async () => (company.value = await getCompany(route.params.id)));
       </div>
     </div>
     <div v-else>
-      <h2 class="title">Page not found!</h2>
+      <h2 class="title text-2xl text-center">You don't have company with this ID.</h2>
     </div>
   </main>
 </template>
