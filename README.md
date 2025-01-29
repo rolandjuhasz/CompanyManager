@@ -1,29 +1,44 @@
 # CompanyManager
 
-This template should help get you started developing with Vue 3 in Vite.
+CompanyManager is a web application designed for creating and managing your own companies. The platform allows users to add companies, manage their details, and hire employees within the company. All data is private and visible only to the account owner, ensuring complete confidentiality.
 
-## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## 🚀 Features
 
-## Customize configuration
+- Create and manage companies
+- Add and manage employees within companies
+- Edit and delete company details
+- Private data access for secure management
 
-See [Vite Configuration Reference](https://vite.dev/config/).
 
-## Project Setup
+## 🔧 Prerequisites
 
-```sh
+- Vue.js (Frontend)
+- Laravel (Backend)
+- SQL (Database)
+
+## ⚙️ Installation
+
+1. Clone the repository:
+```
+git clone https://github.com/username/JobSpring.git
+```
+```
+-cd JobSpring
+```
+```
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+```
 npm run dev
 ```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
+<br>Backend</br>
+```
+cd CompanyManager_API
+```
+```
+composer install  
+```
+```
+php artisan serve   
 ```
