@@ -32,6 +32,11 @@ const authStore = useAuthStore();
           :to="{ name: 'companies' }"
           class="text-sm bg-green-500 px-4 py-2 rounded-lg hover:bg-green-600 transition"
         >My Companies</RouterLink>
+
+        <RouterLink
+          :to="{ name: 'profile' }"
+          class="text-sm bg-red-500 px-4 py-2 rounded-lg hover:bg-red-600 transition"
+        >Profile</RouterLink>
       </div>
 
       <div v-else class="flex items-center space-x-6">

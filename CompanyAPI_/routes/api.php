@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::apiResource('employees', EmployeeController::class);
 });
 
-Route::middleware('auth:sanctum')->get('/company/{company}/employees', [EmployeeController::class, 'getEmployeesByCompany']);
+Route::get('/company/{company_id}/employees', [EmployeeController::class, 'getEmployees']);
 
 Route::middleware('auth:sanctum')->group(function () {
     // Csak a bejelentkezett felhasználó cégei lesznek elérhetők

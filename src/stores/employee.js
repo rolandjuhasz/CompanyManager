@@ -36,22 +36,33 @@ export const useEmployeeStore = defineStore('employeeStore', {
         }
       },
       
-
-
-    
-    async getEmployeeById(id) {
-      try {
-        const res = await fetch(`/api/employees/${id}`);
-        const data = await res.json();
-        if (res.ok) {
-          this.employee = data;
-        } else {
-          this.errors = data.errors || {};
+      async getEmployeesById(companyId) {
+        console.log('Received companyId:', companyId);
+        try {
+          const token = localStorage.getItem("token");
+          if (!token) {
+            throw new Error("No token found");
+          }
+      
+          const res = await fetch(`/api/company/${companyId}/employees`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+      
+          if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+          }
+      
+          const data = await res.json();
+          this.employees = data;
+        } catch (error) {
+          console.error('Error fetching employees:', error);
+          this.errors = { message: error.message };
         }
-      } catch (error) {
-        console.error('Error fetching employee:', error);
       }
-    },
+      ,
+      
 
     
     async addEmployee(employeeData, companyId) {

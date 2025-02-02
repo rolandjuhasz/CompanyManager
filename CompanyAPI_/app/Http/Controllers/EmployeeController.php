@@ -86,11 +86,9 @@ public function index(Request $request)
         //
     }
 
-    public function getEmployeesByCompany(Company $company)
-    {
-        // Lekérjük az összes alkalmazottat, amely a megadott céghez tartozik
-        $employees = $company->employees; // Az employees kapcsolatot feltételezve
-
+    public function getEmployees($company_id) {
+        $company = Company::findOrFail($company_id);
+        $employees = $company->employees; // Tegyük fel, hogy van egy employees reláció a Company modelben
         return response()->json($employees);
     }
 }

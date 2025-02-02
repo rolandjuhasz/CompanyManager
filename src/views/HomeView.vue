@@ -31,7 +31,6 @@ const steps = ref([
 
 <template>
   <main class="min-h-screen bg-gradient-to-r from-gray-100 to-gray-200 text-gray-800">
-    <!-- Hero Section -->
     <section class="relative text-center py-20 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-b-lg shadow-md">
       <div class="absolute inset-0 bg-blue-700 opacity-50"></div>
       <div class="relative z-10">
@@ -47,7 +46,6 @@ const steps = ref([
       </div>
     </section>
 
-    <!-- Steps Section -->
     <section class="py-16">
       <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 px-8">
@@ -64,7 +62,6 @@ const steps = ref([
       </div>
     </section>
 
-    <!-- Call to Action Section -->
     <section class="py-16 bg-gradient-to-r from-blue-500 to-blue-600 text-white text-center rounded-t-lg">
       <h2 class="text-4xl font-bold mb-4">Ready to Begin?</h2>
       <p class="text-lg font-light mb-6">

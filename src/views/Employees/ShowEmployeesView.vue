@@ -1,8 +1,14 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth';
 import { useEmployeeStore } from '@/stores/employee';
 import { onMounted, ref } from 'vue';
+import {useRoute } from "vue-router";
 
+const route = useRoute();
 const employeeStore = useEmployeeStore();
+const authStore = useAuthStore();
+const company = ref(null);
+const employees = ref([]);
 
 const employeeToUpdate = ref({
   id: null,
@@ -46,9 +52,12 @@ const resetEmployeeForm = () => {
   isUpdated.value = false;
 };
 
-onMounted(() => {
-  employeeStore.getEmployees();
+onMounted(async () => {
+  const companyId = 22;
+  await employeeStore.getEmployeesById(companyId);  // Most már átadjuk a companyId-t
 });
+
+
 </script>
 
 <template>

@@ -22,7 +22,6 @@ class CompanyController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        // Az aktuális felhasználó cégeit adja vissza
         return Company::where('user_id', Auth::id())->get();
     }
 
@@ -46,7 +45,6 @@ class CompanyController extends Controller implements HasMiddleware
      */
     public function show($id)
     {
-        // Csak a bejelentkezett felhasználóhoz tartozó céget adja vissza
         $company = Company::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         
         return response()->json([

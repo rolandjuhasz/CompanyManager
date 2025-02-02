@@ -36,19 +36,26 @@ const router = createRouter({
       meta: { auth: true },
     },
     {
+      path: "/profile",
+      name: "profile",
+      component: HomeView,
+      meta: { auth: true },
+    },
+    {
       path: "/companies/create",
       name: "create",
       component: CreateCompany,
       meta: { auth: true },
     },
     {
-      path: "/companies/show/:id", // Itt az :id az útvonal paraméter
+      path: "/companies/show/:id",
       name: "show",
       component: ShowCompanyView,
       meta: { auth: true },
     },
     {
-      path: '/companies/show/:id',
+      path: '/company/:companyId/employees',
+      name: "employees",
       component: EmployeView,
     }
     
