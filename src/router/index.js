@@ -8,6 +8,7 @@ import MyCompaniesView from "@/views/Companies/MyCompaniesView.vue";
 import CreateCompany from "@/components/CreateCompany.vue";
 import ShowCompanyView from "@/views/Companies/ShowCompanyView.vue";
 import EmployeView from "@/views/Employees/EmployeView.vue";
+import ProfileView from "@/views/Auth/ProfileView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,7 +39,13 @@ const router = createRouter({
     {
       path: "/profile",
       name: "profile",
-      component: HomeView,
+      component: ProfileView,
+      meta: { auth: true },
+    },
+    {
+      path: "/profile/edit",
+      name: "profile",
+      component: ProfileView,
       meta: { auth: true },
     },
     {

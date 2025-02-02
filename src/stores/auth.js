@@ -22,6 +22,7 @@ export const useAuthStore = defineStore("authStore", {
         }
       }
     },
+
     /******************* Login or Register user *******************/
     async authenticate(apiRoute, formData) {
       const res = await fetch(`/api/${apiRoute}`, {
@@ -39,6 +40,7 @@ export const useAuthStore = defineStore("authStore", {
         this.router.push({ name: "home" });
       }
     },
+
     /******************* Logout user *******************/
     async logout() {
       const res = await fetch("/api/logout", {
@@ -56,6 +58,28 @@ export const useAuthStore = defineStore("authStore", {
         this.errors = {};
         localStorage.removeItem("token");
         this.router.push({ name: "home" });
+      }
+    },
+
+    /******************* Update user profile *******************/
+    async updateProfile(updatedData) {
+      const res = await fetch("/api/profile/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        this.user = data.user; // Frissítsd a felhasználói adatokat
+        this.errors = {};
+        return { success: true, message: "Profil sikeresen frissítve!" };
+      } else {
+        this.errors = data.errors || { general: "Hiba történt a profil frissítése közben." };
+        return { success: false, message: "Hiba történt a profil frissítése közben." };
       }
     },
   },
